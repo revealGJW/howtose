@@ -48,6 +48,7 @@ public class FeedHandler implements EventHandler {
             }
             map.put("questionId", String.valueOf(question.getId()));
             map.put("questionTitle", question.getTitle());
+            map.put("questionCommentCount", String.valueOf(question.getCommentCount()));
             return JSONObject.toJSONString(map);
         }
         return null;

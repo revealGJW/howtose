@@ -57,7 +57,8 @@ public class CommentController {
 
             commentService.addComment(comment);
 
-            int count = commentService.getCommentCount(EntityType.ENTITY_QUESTION, questionId);
+            int count = commentService.getCommentCount(questionId, EntityType.ENTITY_QUESTION);
+            System.out.println(count);
             questionService.updateCommentCount(questionId, count);
 
             eventProducer.fireEvent(new EventModel(EventType.COMMENT)
