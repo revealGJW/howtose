@@ -1096,6 +1096,15 @@ html.no-touchevents .zg-link-gray:hover,html.no-touchevents .zg-link-gray-normal
 
 .zu-main-content-inner {
     position: relative;
+    margin-left:auto;
+    margin-right:auto;
+    width: 75%;
+
+
+}
+
+.feed-item-inner {
+    background-color: white;
 }
 
 .zu-main-sidebar {
