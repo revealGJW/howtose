@@ -64,7 +64,7 @@ public class HomeController {
         return "profile";
     }
 
-    @RequestMapping({"/", "/index"})
+    @RequestMapping(path = {"/", "/index"})
     public String index(Model model, HttpSession httpSession) {
         model.addAttribute("vos", getQuestions(0, 0, 10));
         return "index";
@@ -92,5 +92,10 @@ public class HomeController {
             vos.add(vo);
         }
         return vos;
+    }
+
+    @RequestMapping({"/vm"})
+    public String temp() {
+        return "home2";
     }
 }

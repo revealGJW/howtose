@@ -1,21 +1,34 @@
 #parse("new_head.html")
 <link rel="stylesheet" href="../styles/index.css">
 <link rel="stylesheet" href="../styles/detail.css">
+
+
+
+<!-- scripts -->
+<script src="/scripts/main/site/particles.js"></script>
+<script src="/scripts//app.js"></script>
+<div id="particles-js"></div>
     <div class="zg-wrap zu-main clearfix " role="main">
         <div class="zu-main-content">
             <div class="zu-main-content-inner">
-                <div class="zg-section" id="zh-home-list-title">
-                    <i class="zg-icon zg-icon-feedlist"></i>最新动态
-                    <input type="hidden" id="is-topstory">
-                    <span class="zg-right zm-noti-cleaner-setting" style="list-style:none">
-                        <a href="https://nowcoder.com/settings/filter" class="zg-link-gray-normal">
-                            <i class="zg-icon zg-icon-settings"></i>设置</a></span>
+                <div class="page-head">
+                    <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                            <h1>首页
+                                <small>最新动态</small>
+                            </h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                        <!-- BEGIN PAGE TOOLBAR -->
+                    </div>
                 </div>
+                <!-- END PAGE HEAD-->
                 <div class="zu-main-feed-con navigable" data-feedtype="topstory" id="zh-question-list" data-widget="navigable" data-navigable-options="{&quot;items&quot;:&quot;&gt; .zh-general-list .feed-content&quot;,&quot;offsetTop&quot;:-82}">
                     <a href="javascript:;" class="zu-main-feed-fresh-button" id="zh-main-feed-fresh-button" style="display:none"></a>
                     <div id="js-home-feed-list" class="zh-general-list topstory clearfix" data-init="{&quot;params&quot;: {}, &quot;nodename&quot;: &quot;TopStory2FeedList&quot;}" data-delayed="true" data-za-module="TopStoryFeedList">
                         #foreach($vo in $vos)
-                        <div class="feed-item folding feed-item-hook feed-item-2
+                        <!--<div class="feed-item folding feed-item-hook feed-item-2
                         " feed-item-a="" data-type="a" id="feed-2" data-za-module="FeedItem" data-za-index="">
                             <meta itemprop="ZReactor" data-id="389034" data-meta="{&quot;source_type&quot;: &quot;promotion_answer&quot;, &quot;voteups&quot;: 4168, &quot;comments&quot;: 69, &quot;source&quot;: []}">
                             <div class="feed-item-inner">
@@ -65,64 +78,68 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         #end
-                    </div>
-
-
-                    <div class="Card TopstoryItem" data-reactid="82">
-                        <div class="Feed" data-reactid="87" data-za-detail-view-path-module="FeedItem">
-                        <div class="FeedSource" data-reactid="88">
-                                <div class="FeedSource-firstline" data-reactid="89">
+                        #foreach($vo in $vos)
+                        <div class="Card TopstoryItem" data-reactid="82">
+                            <div class="Feed" data-reactid="87" data-za-detail-view-path-module="FeedItem">
+                                <div class="FeedSource" data-reactid="88">
+                                    <div class="FeedSource-firstline" data-reactid="89">
                             <span data-reactid="90">
                                 <span data-reactid="92"><span class="UserLink" data-reactid="93"><div class="Popover"
                                                                                                       data-reactid="94">
                                     <div id="Popover-88661-22688-toggle" aria-haspopup="true" aria-expanded="false"
                                          aria-owns="Popover-88661-22688-content" data-reactid="95">
                                         <a class="UserLink-link" data-za-detail-view-element_name="User" target="_blank"
-                                           href="//www.zhihu.com/people/lan-se-52-30" data-reactid="96">蓝色</a>
+                                           href="/user/$!{vo.user.id}" data-reactid="96">$!{vo.user.name}</a>
                                     </div>
                                 </div>
                                 </span>
                                 </span>关注了问题
                             </span>
-                                    <span data-reactid="99"> · </span>
-                                    16 小时前</div>
+                                        <span data-reactid="99"> · </span>
+                                        $date.format('yyyy-MM-dd HH:mm:ss', $!{vo.question.createdDate})</div>
+                                </div>
+                                <div class="ContentItem" data-reactid="101" data-za-detail-view-path-module="QuestionItem">
+                                    <h2 class="ContentItem-title" data-reactid="102">
+                                        <div class="QuestionItem-title" data-reactid="103"><a href="/question/$!{vo.question.id}"
+                                                                                              target="_blank"
+                                                                                              data-za-detail-view-name="Title"
+                                                                                              data-reactid="104">$!{vo.question.title}</a>
+                                        </div>
+                                    </h2>
+                                    <div class="RichContent is-collapsed" data-reactid="105">
+                                        <div class="RichContent-inner" data-reactid="106"><span
+                                                class="RichText CopyrightRichText-richText" itemprop="text"
+                                                data-reactid="107">${vo.question.content}</span>
+                                        </div>
+                                        <div class="ContentItem-actions" data-reactid="114">
+                                            <button class="FollowButton ContentItem-action Button--blue"
+                                                    type="button" data-reactid="115"><!-- react-text: 116 -->关注问题
+                                                <!-- /react-text --></button>
+                                            <div class="Popover ShareMenu ContentItem-action" data-reactid="123">
+                                                <div class="" id="Popover-88662-85785-toggle" aria-haspopup="true"
+                                                     aria-expanded="false" aria-owns="Popover-88662-85785-content"
+                                                     data-reactid="124">
+                                                </div><!-- react-empty: 131 --></div>
+                                            <a class="FollowButton ContentItem-action" type="button"
+                                               href="/question/268533477" data-reactid="132">
+                                                <!-- react-text: 137 -->${vo.question.commentCount}<!-- /react-text --><!-- react-text: 138 --> 个回答
+                                                <!-- /react-text --></a></div>
+                                    </div><!-- react-empty: 139 --></div>
                             </div>
-                            <div class="ContentItem" data-reactid="101" data-za-detail-view-path-module="QuestionItem">
-                                <h2 class="ContentItem-title" data-reactid="102">
-                                    <div class="QuestionItem-title" data-reactid="103"><a href="/question/268533477"
-                                                                                          target="_blank"
-                                                                                          data-za-detail-view-name="Title"
-                                                                                          data-reactid="104">计算机是不是人类科学技术的集大成者，是的话体现在哪些地方，不是的话有没有另外一项事物可以算是？</a>
-                                    </div>
-                                </h2>
-                                <div class="RichContent is-collapsed" data-reactid="105">
-                                    <div class="RichContent-inner" data-reactid="106"><span
-                                            class="RichText CopyrightRichText-richText" itemprop="text"
-                                            data-reactid="107">我是一名计算机专业的学生，时常看着眼前的笔记本，就想着这小小的里面蕴含了无数人类智慧的结晶，为不由心生敬畏。计算机为我们…</span>
-                                    </div>
-                                    <div class="ContentItem-actions" data-reactid="114">
-                                        <button class="FollowButton ContentItem-action Button--blue"
-                                                type="button" data-reactid="115"><!-- react-text: 116 -->关注问题
-                                            <!-- /react-text --></button>
-                                        <div class="Popover ShareMenu ContentItem-action" data-reactid="123">
-                                            <div class="" id="Popover-88662-85785-toggle" aria-haspopup="true"
-                                                 aria-expanded="false" aria-owns="Popover-88662-85785-content"
-                                                 data-reactid="124">
-                                            </div><!-- react-empty: 131 --></div>
-                                        <a class="FollowButton ContentItem-action" type="button"
-                                           href="/question/268533477" data-reactid="132">
-                                            <!-- react-text: 137 -->9<!-- /react-text --><!-- react-text: 138 --> 个回答
-                                            <!-- /react-text --></a></div>
-                                </div><!-- react-empty: 139 --></div>
                         </div>
+                        #end
                     </div>
+
+
+
 
 
                     <a href="javascript:;" id="btn-next" data-method="next" class="zg-btn-white zg-r3px btn-next zu-button-more" style="">更多</a></div>
             </div>
         </div>
     </div>
+
 
 #parse("new_foot.html")
