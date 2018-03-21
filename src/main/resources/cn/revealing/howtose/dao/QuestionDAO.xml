@@ -17,4 +17,14 @@
         ORDER BY id DESC
         LIMIT #{offset},#{limit}
     </select>
+
+    <select id="selectHotQuestions" resultType="cn.revealing.howtose.model.Question">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        WHERE is_hot=1
+        ORDER BY id DESC
+        LIMIT #{offset},#{limit}
+    </select>
 </mapper>

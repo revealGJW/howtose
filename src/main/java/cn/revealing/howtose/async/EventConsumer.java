@@ -51,6 +51,9 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware{
                 while(true) {
                     String key = RedisKeyUtil.getEventQueueKey();
                     List<String> events = jedisAdapter.brpop(0, key);
+                    if(events == null) {
+                        continue;
+                    }
                     for (String event : events) {
                         if(event.equals(key)) continue;
                         EventModel model = JSON.parseObject(event, EventModel.class);

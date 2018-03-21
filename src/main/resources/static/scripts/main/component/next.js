@@ -97,5 +97,53 @@ function addQuestions(vo) {
                                 </div>
                             </div>
                         </div>`;
-    return html;
+    var new_html = `<div class="Card TopstoryItem" data-reactid="82">
+                            <div class="Feed" data-reactid="87" data-za-detail-view-path-module="FeedItem">
+                                <div class="FeedSource" data-reactid="88">
+                                    <div class="FeedSource-firstline" data-reactid="89">
+                            <span data-reactid="90">
+                                <span data-reactid="92"><span class="UserLink" data-reactid="93"><div class="Popover"
+                                                                                                      data-reactid="94">
+                                    <div id="Popover-88661-22688-toggle" aria-haspopup="true" aria-expanded="false"
+                                         aria-owns="Popover-88661-22688-content" data-reactid="95">
+                                        <a class="UserLink-link" data-za-detail-view-element_name="User" target="_blank"
+                                           href="/user/${vo.objs.user.id}" data-reactid="96">${name}</a>
+                                    </div>
+                                </div>
+                                </span>
+                                </span>关注了问题
+                            </span>
+                                        <span data-reactid="99"> · </span>
+                                        ${date.toLocaleString()})</div>
+                                </div>
+                                <div class="ContentItem" data-reactid="101" data-za-detail-view-path-module="QuestionItem">
+                                    <h2 class="ContentItem-title" data-reactid="102">
+                                        <div class="QuestionItem-title" data-reactid="103"><a href="/question/${questionId}"
+                                                                                              target="_blank"
+                                                                                              data-za-detail-view-name="Title"
+                                                                                              data-reactid="104">${title}</a>
+                                        </div>
+                                    </h2>
+                                    <div class="RichContent is-collapsed" data-reactid="105">
+                                        <div class="RichContent-inner" data-reactid="106"><span
+                                                class="RichText CopyrightRichText-richText" itemprop="text"
+                                                data-reactid="107">${content}</span>
+                                        </div>
+                                        <div class="ContentItem-actions" data-reactid="114">
+                                            <button class="FollowButton ContentItem-action Button--blue"
+                                                    type="button" data-reactid="115"><!-- react-text: 116 -->关注问题
+                                                <!-- /react-text --></button>
+                                            <div class="Popover ShareMenu ContentItem-action" data-reactid="123">
+                                                <div class="" id="Popover-88662-85785-toggle" aria-haspopup="true"
+                                                     aria-expanded="false" aria-owns="Popover-88662-85785-content"
+                                                     data-reactid="124">
+                                                </div><!-- react-empty: 131 --></div>
+                                            <a class="FollowButton ContentItem-action" type="button"
+                                               href="/question/268533477" data-reactid="132">
+                                                <!-- react-text: 137 -->${commentCount}<!-- /react-text --><!-- react-text: 138 --> 个回答
+                                                <!-- /react-text --></a></div>
+                                    </div><!-- react-empty: 139 --></div>
+                            </div>
+                        </div>`
+    return new_html;
 }

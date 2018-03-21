@@ -94,8 +94,22 @@ public class HomeController {
         return vos;
     }
 
-    @RequestMapping({"/vm"})
-    public String temp() {
-        return "home2";
+    private List<ViewObject> getHotQuestions(int offset, int limit){
+        List<ViewObject> vos = new ArrayList<ViewObject>();
+        List<Question> questions = questionService.getHotQuestions(offset, limit);
+        for (Question question : questions) {
+            ViewObject vo = new ViewObject();
+            vo.set("question", question);
+            vo.set("user", userService.getUser(question.getUserId()));
+            vo.set("followCount", followService.getFollowerCount(EntityType.ENTITY_QUESTION, question.getId()));
+            vos.add(vo);
+        }
+        return vos;
+    }
+
+    @RequestMapping({"/hot"})
+    public String getHot(Model model) {
+        model.addAttribute("vos", getHotQuestions(0, 10));
+        return "hot";
     }
 }

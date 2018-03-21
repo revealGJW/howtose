@@ -18,6 +18,7 @@ import java.util.Set;
 @Component
 public class JedisAdapter implements InitializingBean {
     public static final Logger LOGGER = LoggerFactory.getLogger(JedisAdapter.class);
+    public static final String host = "140.143.237.210";
     JedisPool pool = null;
 
     /*public static void main(String[] args) {
@@ -29,7 +30,7 @@ public class JedisAdapter implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        pool = new JedisPool("localhost");
+        pool = new JedisPool(host);
     }
 
     public long sadd(String key, String value) {
