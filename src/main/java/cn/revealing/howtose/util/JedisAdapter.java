@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by GJW on 2017/7/7.
+ * Created by GJW on 2017/12/7.
  */
 @Component
 public class JedisAdapter implements InitializingBean {

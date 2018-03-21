@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 /**
- * Created by GJW on 2017/6/26.
+ * Created by GJW on 2017/11/26.
  */
 @Controller
 public class CommentController {

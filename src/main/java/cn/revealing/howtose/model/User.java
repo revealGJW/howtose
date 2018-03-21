@@ -1,7 +1,7 @@
 package cn.revealing.howtose.model;
 
 /**
- * Created by GJW on 2017/5/13.
+ * Created by GJW on 2017/11/13.
  */
 public class User {
     private int id;

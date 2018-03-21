@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by GJW on 2017/6/18.
+ * Created by GJW on 2017/11/18.
  */
 @Mapper
 public interface LoginTicketDAO {

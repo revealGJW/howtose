@@ -1,7 +1,7 @@
 package cn.revealing.howtose.util;
 
 /**
- * Created by GJW on 2017/7/7.
+ * Created by GJW on 2017/12/7.
  */
 public class RedisKeyUtil {
     private static String SPLIT = ":";

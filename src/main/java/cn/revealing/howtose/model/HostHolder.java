@@ -3,7 +3,7 @@ package cn.revealing.howtose.model;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by GJW on 2017/6/19.
+ * Created by GJW on 2017/11/19.
  */
 @Component
 public class HostHolder {

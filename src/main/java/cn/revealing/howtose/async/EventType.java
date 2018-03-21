@@ -1,7 +1,7 @@
 package cn.revealing.howtose.async;
 
 /**
- * Created by GJW on 2017/7/8.
+ * Created by GJW on 2017/12/8.
  */
 public enum EventType {
     LIKE(0),

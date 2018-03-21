@@ -6,7 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import java.util.Date;
 
 /**
- * Created by GJW on 2017/7/6.
+ * Created by GJW on 2017/12/6.
  */
 public class Message {
     private int id;

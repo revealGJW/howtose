@@ -1,7 +1,7 @@
 package cn.revealing.howtose.model;
 
 /**
- * Created by GJW on 2017/7/6.
+ * Created by GJW on 2017/12/6.
  */
 public class EntityType {
     public static int ENTITY_QUESTION = 1;

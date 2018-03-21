@@ -1,7 +1,7 @@
 package cn.revealing.howtose.model;
 
 /**
- * Created by GJW on 2017/7/8.
+ * Created by GJW on 2017/12/8.
  */
 public class LikeType {
     public static int QUESTION_LIKE = 1;

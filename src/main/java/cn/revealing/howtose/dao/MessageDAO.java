@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- * Created by GJW on 2017/7/6.
+ * Created by GJW on 2017/12/6.
  */
 @Mapper
 public interface MessageDAO {

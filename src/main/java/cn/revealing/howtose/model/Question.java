@@ -3,7 +3,7 @@ package cn.revealing.howtose.model;
 import java.util.Date;
 
 /**
- * Created by GJW on 2017/5/16.
+ * Created by GJW on 2017/11/16.
  */
 public class Question {
     private int id;

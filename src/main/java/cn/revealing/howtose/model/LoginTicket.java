@@ -3,7 +3,7 @@ package cn.revealing.howtose.model;
 import java.util.Date;
 
 /**
- * Created by GJW on 2017/6/18.
+ * Created by GJW on 2017/11/18.
  */
 public class LoginTicket {
     private int id;
