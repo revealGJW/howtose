@@ -235,6 +235,51 @@ public class JedisAdapter implements InitializingBean {
         return 0;
     }
 
+    public String setex(String key, int sec, String code){
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.setex(key, sec, code);
+        } catch (Exception e) {
+            LOGGER.error("redis添加错误:" + e.getMessage());
+        } finally {
+            if (jedis != null)
+                jedis.close();
+        }
+
+        return "";
+    }
+
+    public Boolean exists(String key){
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.exists(key);
+        } catch (Exception e) {
+            LOGGER.error("redis添加错误:" + e.getMessage());
+        } finally {
+            if (jedis != null)
+                jedis.close();
+        }
+
+        return false;
+    }
+
+    public String get(String key){
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.get(key);
+        } catch (Exception e) {
+            LOGGER.error("redis get错误:" + e.getMessage());
+        } finally {
+            if (jedis != null)
+                jedis.close();
+        }
+
+        return "";
+    }
+
     public Double zscore(String key, String member) {
         Jedis jedis = null;
         try {

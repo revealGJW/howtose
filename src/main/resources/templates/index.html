@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                                 </span>
-                                </span>关注了问题
+                                </span>提出了问题
                             </span>
                                         <span data-reactid="99"> · </span>
                                         $date.format('yyyy-MM-dd HH:mm:ss', $!{vo.question.createdDate})</div>
@@ -61,7 +61,7 @@
                                                 data-reactid="107">${vo.question.content}</span>
                                         </div>
                                         <div class="ContentItem-actions" data-reactid="114">
-                                            <button class="FollowButton ContentItem-action Button--blue"
+                                            <button class="FollowButton ContentItem-action Button--blue js-follow-question" data-id="${vo.question.id}"
                                                     type="button" data-reactid="115"><!-- react-text: 116 -->关注问题
                                                 <!-- /react-text --></button>
                                             <div class="Popover ShareMenu ContentItem-action" data-reactid="123">
@@ -70,7 +70,7 @@
                                                      data-reactid="124">
                                                 </div><!-- react-empty: 131 --></div>
                                             <a class="FollowButton ContentItem-action" type="button"
-                                               href="/question/268533477" data-reactid="132">
+                                               href="/question/$!{vo.question.id}" data-reactid="132">
                                                 <!-- react-text: 137 -->${vo.question.commentCount}<!-- /react-text --><!-- react-text: 138 --> 个回答
                                                 <!-- /react-text --></a></div>
                                     </div><!-- react-empty: 139 --></div>

@@ -11,6 +11,7 @@ public class RedisKeyUtil {
     private static String BIZ_FOLLOWER = "FOLLOWER";
     private static String BIZ_FOLLOWEE = "FOLLOWEE";
     private static String BIZ_TIMELINE = "TIMELINE";
+    private static String REGISTER = "REGISTER";
 
     public static String getLikeKey(int entityType, int entityId) {
         return BIZ_LIKE + SPLIT + String.valueOf(entityType) + SPLIT + String.valueOf(entityId);
@@ -38,4 +39,7 @@ public class RedisKeyUtil {
         return BIZ_TIMELINE + SPLIT + String.valueOf(userId);
     }
 
+    public static String getRegisterKey() {
+        return REGISTER;
+    }
 }
