@@ -15,4 +15,16 @@
 
         LIMIT #{offset},#{limit}
     </select>
+
+    <select id="getLatestComment" resultType="cn.revealing.howtose.model.Comment">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        ORDER BY created_date DESC
+
+        LIMIT #{offset},#{limit}
+    </select>
+
+
 </mapper>

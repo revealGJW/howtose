@@ -53,4 +53,11 @@ public class CommentService {
         return commentDAO.getUserCommentCount(userId);
     }
 
+    public List<Comment> getLatestComment(int start, int limit) {
+        return commentDAO.getLatestComment(start, limit);
+    }
+
+    public boolean changeCommentStatus(int commentId, int status) {
+        return commentDAO.updateStatus(commentId, status) > 0 ? true : false;
+    }
 }

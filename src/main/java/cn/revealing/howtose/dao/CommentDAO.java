@@ -42,4 +42,7 @@ public interface CommentDAO {
 
     @Select({" select count(id) from " + TABLE_NAME + " where user_id=#{userId} " } )
     int getUserCommentCount(@Param("userId") int userId);
+
+
+    List<Comment> getLatestComment(@Param("offset") int offset, @Param("limit") int limit);
 }
