@@ -5,6 +5,10 @@ import cn.revealing.howtose.model.Comment;
 import cn.revealing.howtose.model.Question;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +31,17 @@ public class CommentService {
     SensitiveService sensitiveService;
 
     public List<Comment> getCommentsByEntity(int entityId, int entityType, int offset, int limit) {
-        return commentDAO.selectCommentByEntity(entityId, entityType, offset, limit);
+        List<Comment> comments = commentDAO.selectCommentByEntity(entityId, entityType, offset, limit);
+        for(Comment comment : comments) {
+            Document doc = Jsoup.parse(comment.getContent());
+            Elements imgs  = doc.select("noscript");
+            for(Element e : imgs) {
+                String img  = e.html();
+                e.parent().html(img);
+            }
+            comment.setContent(doc.html());
+        }
+        return comments;
     }
 
     public int addComment(Comment comment) {
@@ -59,5 +73,21 @@ public class CommentService {
 
     public boolean changeCommentStatus(int commentId, int status) {
         return commentDAO.updateStatus(commentId, status) > 0 ? true : false;
+    }
+
+    public List<Comment> getCommentByIds(List<Integer> cids) {
+        return commentDAO.selectByIds(cids);
+    }
+
+    public void batchAddComment(List<Comment> comments) {
+        commentDAO.addComments(comments);
+    }
+
+    public void updateScore(int id, int score) {
+        commentDAO.updateScore(id, score);
+    }
+
+    public List<Comment> getNoScoreComment(int limit) {
+        return commentDAO.getNoScoreComment(limit);
     }
 }

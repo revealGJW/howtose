@@ -15,12 +15,11 @@ import java.util.List;
 public interface CommentDAO {
     public static final Logger LOGGER = LoggerFactory.getLogger(CommentDAO.class);
     String TABLE_NAME = " comment ";
-    String INSERT_FIELDS = " user_id, content, created_date, entity_id, entity_type, status ";
-    //String INSERT_FILEDS = " user_id, entity_type, entity_id, created_date, content, status ";
+    String INSERT_FIELDS = " user_id, content, created_date, entity_id, entity_type, status, score ";
     String SELECT_FILEDS = "id, " + INSERT_FIELDS;
 
     @Insert({"insert into ", TABLE_NAME, "(", INSERT_FIELDS,
-            ") values (#{userId},#{content},#{createdDate},#{entityId},#{entityType},#{status})"})
+            ") values (#{userId},#{content},#{createdDate},#{entityId},#{entityType},#{status}, #{score})"})
     int addComment(Comment comment);
     /*@Insert( {" insert into ", TABLE_NAME ,"(", INSERT_FILEDS,
             " ) values (#{userId}, #{entityType}, #{entityId}, #{createdDate}, #{content}, #{status})"})
@@ -45,4 +44,13 @@ public interface CommentDAO {
 
 
     List<Comment> getLatestComment(@Param("offset") int offset, @Param("limit") int limit);
+
+    List<Comment> selectByIds(@Param("ids") List<Integer> ids);
+
+    void addComments(@Param("comments") List<Comment> comments);
+
+    @Update({"update ", TABLE_NAME, " set score = #{score} where id = #{id}"})
+    int updateScore(@Param("id") int id, @Param("score") int score);
+
+    List<Comment> getNoScoreComment(@Param("limit") int limit);
 }

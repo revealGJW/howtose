@@ -90,4 +90,22 @@
       add_date = #{addDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByWordID" resultType="cn.revealing.howtose.model.CommentWord" >
+    select
+    <include refid="Base_Column_List" />
+    from comment_word
+    where word_id = #{wid,jdbcType=INTEGER}
+
+    limit #{start}, #{limit}
+  </select>
+
+  <select id="getNoScoreComment" resultType="cn.revealing.howtose.model.CommentWord" >
+    select
+    <include refid="Base_Column_List" />
+    from comment_word
+    where score = NULL
+
+    limit #{limit}
+  </select>
 </mapper>

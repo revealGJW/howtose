@@ -43,13 +43,10 @@
 
         <!-- 要生成哪些表 -->
 
-        <table tableName="comment_word" domainObjectName="CommentWord"
+        <table tableName="score_detail" domainObjectName="ScoreDetail"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="question_word" domainObjectName="QuestionWord"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>
+
     </context>
 </generatorConfiguration>

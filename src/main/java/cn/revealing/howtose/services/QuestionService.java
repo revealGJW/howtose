@@ -3,6 +3,7 @@ package cn.revealing.howtose.services;
 import cn.revealing.howtose.dao.QuestionDAO;
 import cn.revealing.howtose.dao.UserDAO;
 import cn.revealing.howtose.model.Question;
+import cn.revealing.howtose.participle.ParticipleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class QuestionService {
     QuestionDAO questionDAO;
 
     @Autowired
+    ParticipleService participleService;
+
+    @Autowired
     SensitiveService sensitiveService;
     public List<Question> getLatestQuestions(int userId, int offset, int limit){
         return questionDAO.selectLatestQuestions(userId, offset, limit);
@@ -34,7 +38,9 @@ public class QuestionService {
         question.setTitle(HtmlUtils.htmlEscape(question.getTitle()));
         question.setTitle(sensitiveService.filter(question.getTitle()));
         question.setContent(sensitiveService.filter(question.getContent()));
-        return questionDAO.addQuestion(question) > 0 ? question.getId() : 0;
+        questionDAO.addQuestion(question);
+        participleService.addQuestionWord(question);
+        return  question.getId() > 0 ? question.getId() : 0;
     }
 
     public int updateCommentCount(int id, int count) {

@@ -1,6 +1,6 @@
 package cn.revealing.howtose.services;
 
-import cn.revealing.howtose.dao.KeywordDAO;
+import cn.revealing.howtose.dao.KeywordMapper;
 import cn.revealing.howtose.model.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +16,14 @@ import java.util.List;
 public class KeywordService {
 
     @Autowired
-    KeywordDAO keywordDAO;
+    KeywordMapper keywordMapper;
 
     public List<Keyword> getKeywords(int start, int limit) {
-        return keywordDAO.selectKeywords(start, limit);
+        return keywordMapper.selectKeywords(start, limit);
     }
 
     public Keyword getWordByType(String word, int type) {
-        return keywordDAO.selectByType(word, type);
+        return keywordMapper.selectByType(word, type);
     }
 
     public int addWord(String word, int type) {
@@ -32,11 +32,17 @@ public class KeywordService {
         keyword.setWord(word);
         keyword.setType(type);
         keyword.setPriority(1);
-        return keywordDAO.insert(keyword);
+        return keywordMapper.insert(keyword);
     }
 
     public int updatePriority(Keyword keyword) {
         keyword.setPriority(keyword.getPriority() + 1);
-        return keywordDAO.updateByPrimaryKeySelective(keyword);
+        return keywordMapper.updateByPrimaryKeySelective(keyword);
     }
+
+    public Keyword getExistWord(List<String> words) {
+        return keywordMapper.selectExistWord(words);
+    }
+
+
 }

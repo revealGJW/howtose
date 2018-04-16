@@ -13,9 +13,19 @@ public class Comment {
     private Date createdDate;
     private String content;
     private int status;
+    private int score;
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public int getId() {
         return id;
+
     }
 
     public void setId(int id) {

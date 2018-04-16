@@ -2,12 +2,13 @@ package cn.revealing.howtose.dao;
 
 import cn.revealing.howtose.model.Keyword;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Mapper
-public interface KeywordDAO {
+public interface KeywordMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Keyword record);
@@ -20,7 +21,9 @@ public interface KeywordDAO {
 
     int updateByPrimaryKey(Keyword record);
 
-    List<Keyword> selectKeywords(int start, int limit);
+    List<Keyword> selectKeywords(@Param("start") int start,@Param("limit") int limit);
 
-    Keyword selectByType(String word, int type);
+    Keyword selectByType(@Param("word") String word, @Param("type") int type);
+
+    Keyword selectExistWord(@Param("words") List<String> words);
 }

@@ -1,6 +1,7 @@
 package cn.revealing.howtose.controller;
 
 import cn.revealing.howtose.model.*;
+import cn.revealing.howtose.participle.DictionaryService;
 import cn.revealing.howtose.services.CommentService;
 import cn.revealing.howtose.services.FollowService;
 import cn.revealing.howtose.services.QuestionService;
@@ -42,6 +43,8 @@ public class HomeController {
     @Autowired
     FollowService followService;
 
+    @Autowired
+    DictionaryService dictionaryService;
     @Autowired
     HostHolder hostHolder;
 
@@ -112,4 +115,12 @@ public class HomeController {
         model.addAttribute("vos", getHotQuestions(0, 10));
         return "hot";
     }
+
+    @RequestMapping({"/dic"})
+    @ResponseBody
+    public String dic(Model model) {
+        dictionaryService.addKeywords();
+        return "shit";
+    }
+
 }

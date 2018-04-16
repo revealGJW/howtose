@@ -1,7 +1,11 @@
 package cn.revealing.howtose.dao;
 
 import cn.revealing.howtose.model.CommentWord;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+@Mapper
 public interface CommentWordMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +18,6 @@ public interface CommentWordMapper {
     int updateByPrimaryKeySelective(CommentWord record);
 
     int updateByPrimaryKey(CommentWord record);
+
+    List<CommentWord> selectByWordID(@Param("wid") int wid, @Param("start") int start, @Param("limit") int limit);
 }

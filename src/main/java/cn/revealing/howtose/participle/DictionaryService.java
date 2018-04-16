@@ -3,7 +3,10 @@ package cn.revealing.howtose.participle;
 import cn.revealing.howtose.model.Keyword;
 import cn.revealing.howtose.services.KeywordService;
 import com.hankcs.hanlp.dictionary.CustomDictionary;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.List;
  * Created by GJW on 2018/4/13.
  */
 @Service
-public class DictionaryService {
+public class DictionaryService implements ApplicationListener<ContextRefreshedEvent>{
     @Autowired
     KeywordService keywordService;
 
@@ -22,5 +25,10 @@ public class DictionaryService {
             if(keyword.getType() == 1)
                 CustomDictionary.add(keyword.getWord());
         }
+    }
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        addKeywords();
     }
 }

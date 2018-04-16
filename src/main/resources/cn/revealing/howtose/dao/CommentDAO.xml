@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.revealing.howtose.dao.CommentDAO">
     <sql id="table">comment</sql>
-    <sql id="selectFields">id, user_id, entity_type, entity_id,created_date,content, status
+    <sql id="selectFields">id, user_id, entity_type, entity_id,created_date,content, status, score
     </sql>
     <select id="selectCommentByEntity" resultType="cn.revealing.howtose.model.Comment">
         SELECT
@@ -25,6 +25,42 @@
 
         LIMIT #{offset},#{limit}
     </select>
+
+    <select id="getNoScoreComment" resultType="cn.revealing.howtose.model.Comment">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        WHERE score IS NULL
+        ORDER BY created_date DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectByIds" resultType="cn.revealing.howtose.model.Comment">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+
+        WHERE id in
+        <foreach item="item" index="index" collection="ids"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+        ORDER BY created_date DESC
+    </select>
+
+    <insert id="addComments" parameterType="cn.revealing.howtose.model.Comment">
+        INSERT INTO
+        <include refid="table"/>
+        (user_id, content, created_date, entity_id, entity_type)
+        VALUES
+        <foreach collection="comments" item="item" separator=",">
+            (#{item.userId},#{item.content},#{item.createdDate},#{item.entityId},#{item.entityType})
+        </foreach>
+
+    </insert>
 
 
 </mapper>

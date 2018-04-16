@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.revealing.howtose.dao.KeywordDAO" >
+<mapper namespace="cn.revealing.howtose.dao.KeywordMapper" >
   <resultMap id="BaseResultMap" type="cn.revealing.howtose.model.Keyword" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="word" property="word" jdbcType="VARCHAR" />
@@ -25,12 +25,24 @@
     where word = #{word} and type = #{type}
   </select>
 
-  <select id="selectKeywords" resultMap="BaseResultMap" parameterType="cn.revealing.howtose.model.Keyword" >
+  <select id="selectKeywords" resultType="cn.revealing.howtose.model.Keyword" >
     select
     <include refid="Base_Column_List" />
     from keyword
     ORDER BY add_date
     LIMIT #{start},#{limit}
+  </select>
+
+  <select id="selectExistWord" resultType="cn.revealing.howtose.model.Keyword" >
+    select
+    <include refid="Base_Column_List" />
+    from keyword
+    WHERE word IN
+    <foreach collection="words" item="word" separator="," open="(" close=")">
+      #{word, jdbcType=VARCHAR}
+    </foreach>
+    ORDER BY add_date
+    LIMIT 1
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
