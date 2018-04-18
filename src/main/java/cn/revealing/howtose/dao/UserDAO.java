@@ -18,10 +18,10 @@ public interface UserDAO {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(UserDAO.class);
     String TABLE_NAME = " user ";
-    String INSERT_FILEDS = " name, password, salt, head_url ";
+    String INSERT_FILEDS = " name, password, salt, head_url, email ";
     String SELECT_FILEDS = "id, " + INSERT_FILEDS;
     @Insert( {" insert into ", TABLE_NAME ,"(", INSERT_FILEDS,
-            " ) values (#{name}, #{password}, #{salt}, #{headUrl})"})
+            " ) values (#{name}, #{password}, #{salt}, #{headUrl}, #{email})"})
     int addUser(User user);
 
     @Select({"select ",SELECT_FILEDS, "from ", TABLE_NAME, "where id = #{id}"})
@@ -29,6 +29,9 @@ public interface UserDAO {
 
     @Select({"select ",SELECT_FILEDS, "from ", TABLE_NAME, "where name = #{name}"})
     User selectByName(String name);
+
+    @Select({"select ",SELECT_FILEDS, "from ", TABLE_NAME, "where email = #{email}"})
+    User selectByEmail(String email);
 
     @Update({"update ", TABLE_NAME, " set password = #{password} where id = #{id}"})
     void updatePassword(User user);

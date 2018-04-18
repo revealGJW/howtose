@@ -111,7 +111,7 @@ function addQuestions(vo) {
                                     </div>
                                 </div>
                                 </span>
-                                </span>关注了问题
+                                </span>提出了问题
                             </span>
                                         <span data-reactid="99"> · </span>
                                         ${date.toLocaleString()})</div>
