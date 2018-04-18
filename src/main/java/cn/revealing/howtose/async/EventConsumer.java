@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by GJW on 2017/12/8.
@@ -29,6 +31,8 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware{
 
     Map<EventType, List<EventHandler>> config = new HashMap<EventType, List<EventHandler>>();
     private ApplicationContext applicationContext;
+
+    public static ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -45,7 +49,7 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware{
             }
         }
 
-        Thread thread= new Thread(new Runnable() {
+        executorService.execute( new Thread(new Runnable() {
             @Override
             public void run() {
                 while(true) {
@@ -68,8 +72,7 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware{
                     }
                 }
             }
-        });
-        thread.start();
+        }));
     }
 
     @Override

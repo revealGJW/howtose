@@ -51,6 +51,19 @@ public class FeedHandler implements EventHandler {
             map.put("questionCommentCount", String.valueOf(question.getCommentCount()));
             return JSONObject.toJSONString(map);
         }
+
+        if(model.getEventType() == EventType.LIKE) {
+            User commentUser = userService.getUser(model.getEntityOwnerId());
+            map.put("commentUserName", commentUser.getName());
+            Question question = questionService.getQuestion(Integer.parseInt(model.getExt("questionId")));
+            if(question == null) {
+                return null;
+            }
+            map.put("questionId", String.valueOf(question.getId()));
+            map.put("questionTitle", question.getTitle());
+            map.put("questionCommentCount", String.valueOf(question.getCommentCount()));
+            return JSONObject.toJSONString(map);
+        }
         return null;
     }
     @Override
@@ -72,7 +85,7 @@ public class FeedHandler implements EventHandler {
 
     @Override
     public List<EventType> getSupportEventTypes() {
-        return Arrays.asList(new EventType[]{EventType.FOLLOW, EventType.COMMENT});
+        return Arrays.asList(new EventType[]{EventType.FOLLOW, EventType.COMMENT, EventType.LIKE});
 
     }
 }

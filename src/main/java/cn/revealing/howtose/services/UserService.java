@@ -5,6 +5,7 @@ import cn.revealing.howtose.dao.UserDAO;
 import cn.revealing.howtose.model.LoginTicket;
 import cn.revealing.howtose.model.User;
 import cn.revealing.howtose.util.HowtoseUtil;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +31,9 @@ public class UserService {
         return userDAO.selectById(id);
     }
 
-    public Map<String, String> register(String username, String password){
+    public Map<String, String> register(String email, String password){
         Map<String, String> map = new HashMap<String, String>();
-        if(StringUtils.isBlank(username)){
+        if(StringUtils.isBlank(email)){
             map.put("msg", "用户名不能为空");
             return map;
         }
@@ -40,13 +41,14 @@ public class UserService {
             map.put("msg", "密码不能为空");
             return map;
         }
-        User user = userDAO.selectByName(username);
+        /*User user = userDAO.selectByName(username);
         if(user != null){
             map.put("msg", "用户名已存在，请重新输入");
             return map;
-        }
-        user = new User();
-        user.setName(username);
+        }*/
+        User user = new User();
+        user.setEmail(email);
+        user.setName("USER_" + RandomStringUtils.randomAlphabetic(7));
         user.setSalt(UUID.randomUUID().toString().substring(0,5));
         user.setHeadUrl(String.format("http://images.nowcoder.com/head/%dt.png", new Random().nextInt(1000)));
         user.setPassword(HowtoseUtil.MD5(password + user.getSalt()));
@@ -58,19 +60,19 @@ public class UserService {
         return map;
     }
 
-    public Map<String, String> login(String username, String password){
+    public Map<String, String> login(String email, String password){
         Map<String, String> map = new HashMap<String, String>();
-        if(StringUtils.isBlank(username)){
-            map.put("msg", "用户名不能为空");
+        if(StringUtils.isBlank(email)){
+            map.put("msg", "账号不能为空");
             return map;
         }
         if(StringUtils.isBlank(password)){
             map.put("msg", "密码不能为空");
             return map;
         }
-        User user = userDAO.selectByName(username);
+        User user = userDAO.selectByEmail(email);
         if(user == null){
-            map.put("msg", "用户名不存在");
+            map.put("msg", "账号不存在");
             return map;
         }
         if(!HowtoseUtil.MD5(password + user.getSalt()).equals(user.getPassword())){
@@ -102,5 +104,9 @@ public class UserService {
 
     public User selectByName(String name) {
         return userDAO.selectByName(name);
+    }
+
+    public User selectByEmail(String email) {
+        return userDAO.selectByEmail(email);
     }
 }
