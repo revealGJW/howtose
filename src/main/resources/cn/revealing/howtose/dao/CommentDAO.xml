@@ -10,8 +10,8 @@
         <include refid="selectFields"/>
         FROM
         <include refid="table"/>
-        WHERE entity_type = #{entityType} and entity_id = #{entityId}
-        ORDER BY created_date DESC
+        WHERE entity_type = #{entityType} and entity_id = #{entityId} and status = 0
+        ORDER BY created_date, score DESC
 
         LIMIT #{offset},#{limit}
     </select>
