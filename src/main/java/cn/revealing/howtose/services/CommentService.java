@@ -32,16 +32,8 @@ public class CommentService {
 
     public List<Comment> getCommentsByEntity(int entityId, int entityType, int offset, int limit) {
         List<Comment> comments = commentDAO.selectCommentByEntity(entityId, entityType, offset, limit);
-        for(Comment comment : comments) {
-            Document doc = Jsoup.parse(comment.getContent());
-            Elements imgs  = doc.select("noscript");
-            for(Element e : imgs) {
-                String img  = e.html();
-                e.parent().html(img);
-            }
-            comment.setContent(doc.html());
-        }
-        return comments;
+
+        return processImg(comments);
     }
 
     public int addComment(Comment comment) {
@@ -68,7 +60,7 @@ public class CommentService {
     }
 
     public List<Comment> getLatestComment(int start, int limit) {
-        return commentDAO.getLatestComment(start, limit);
+        return processImg(commentDAO.getLatestComment(start, limit));
     }
 
     public boolean changeCommentStatus(int commentId, int status) {
@@ -89,5 +81,18 @@ public class CommentService {
 
     public List<Comment> getNoScoreComment(int limit) {
         return commentDAO.getNoScoreComment(limit);
+    }
+
+    private List<Comment> processImg(List<Comment> comments) {
+        for(Comment comment : comments) {
+            Document doc = Jsoup.parse(comment.getContent());
+            Elements imgs  = doc.select("noscript");
+            for(Element e : imgs) {
+                String img  = e.html();
+                e.parent().html(img);
+            }
+            comment.setContent(doc.html());
+        }
+        return comments;
     }
 }

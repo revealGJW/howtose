@@ -1,5 +1,6 @@
 package cn.revealing.howtose.configuration;
 
+import cn.revealing.howtose.interceptor.AdminInterceptor;
 import cn.revealing.howtose.interceptor.LoginInterceptor;
 import cn.revealing.howtose.interceptor.PassportInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,14 @@ public class HowtoseWebConfiguration extends WebMvcConfigurerAdapter {
 
     @Autowired
     LoginInterceptor loginInterceptor;
+
+    @Autowired
+    AdminInterceptor adminInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(passportInterceptor);
         registry.addInterceptor(loginInterceptor).addPathPatterns("/user/*");
+        registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/*");
         super.addInterceptors(registry);
     }
 }

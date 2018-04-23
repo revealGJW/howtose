@@ -1,0 +1,103 @@
+/#parse("new_head.html")
+<link rel="stylesheet" href="../styles/detail.css">
+<div class="page-head">
+    <div class="container">
+        <!-- BEGIN PAGE TITLE -->
+        <div class="page-title">
+            <h1>首页
+                <small>最新动态</small>
+            </h1>
+        </div>
+        <!-- END PAGE TITLE -->
+        <!-- BEGIN PAGE TOOLBAR -->
+    </div>
+</div>
+<div class="zg-wrap zu-main clearfix with-indention-votebar" itemscope="" itemtype="http://schema.org/Question"
+     id="zh-single-question-page" data-urltoken="36301524" role="main">
+    <div class="zu-main-content">
+        <div class="zu-main-content-inner">
+            <meta itemprop="isTopQuestion" content="false">
+            <meta itemprop="visitsCount" content="402">
+            <!--
+            <div class="zm-tag-editor zg-section">
+                <div class="zm-tag-editor-labels zg-clear">
+                    <a data-tip="t$b$19550730" class="zm-item-tag" href="">新浪微博</a>
+                    <a data-tip="t$b$19554412" class="zm-item-tag" href="">网络营销</a>
+                    <a data-tip="t$b$19559739" class="zm-item-tag" href="">微博粉丝</a>
+                    <a data-tip="t$b$19560290" class="zm-item-tag" href="">僵尸粉</a>
+                    <a data-tip="t$b$19565757" class="zm-item-tag" href="">网络水军</a>
+                    <a href="javascript:;" class="zu-edit-button" name="edit">
+                        <i class="zu-edit-button-icon"></i>修改</a>
+                </div>
+            </div>
+            -->
+
+            <div id="zh-question-answer-wrap" data-pagesize="10" class="zh-question-answer-wrapper navigable"
+                 data-widget="navigable" data-navigable-options="{&quot;items&quot;: &quot;&gt;.zm-item-answer&quot;}"
+                 data-init="{&quot;params&quot;: {&quot;url_token&quot;: 36301524, &quot;pagesize&quot;: 10, &quot;offset&quot;: 0}, &quot;nodename&quot;: &quot;QuestionAnswerListV2&quot;}">
+
+                #foreach($comment in $comments)
+                <div class="zm-item-answer  zm-item-expanded js-comment">
+                    <link itemprop="url" href="">
+                    <meta itemprop="answer-id" content="22162611">
+                    <meta itemprop="answer-url-token" content="66862039">
+                    <a class="zg-anchor-hidden" name="answer-22162611"></a>
+
+                    <div class="answer-head">
+                        <div class="zm-item-answer-author-info">
+                            <a class="zm-item-link-avatar avatar-link" href="" target="_blank" data-tip="p$t$yingxiaodao">
+                                <img src="${comment.user.headUrl}" class="zm-list-avatar avatar"></a>
+                            <a class="author-link" data-tip="p$t$yingxiaodao" target="_blank" href="">${comment.user.name}</a>
+                        </div>
+                        <div class="zm-item-vote-info">
+                                <span class="voters text">
+                                    <a href="" class="more text"><span class="js-voteCount">$!{comment.likeCount}</span>&nbsp;人赞同</a>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="zm-item-rich-text expandable js-collapse-body" data-resourceid="6727688" data-action="/answer/content" data-author-name="营销岛" data-entry-url="/question/36301524/answer/66862039">
+
+                        <div class="zm-editable-content clearfix">
+                            $comment.comment.content
+                        </div>
+                    </div>
+                    <a class="zg-anchor-hidden ac" name="22162611-comment"></a>
+                    <div class="zm-item-meta answer-actions clearfix js-contentActions">
+                        <div class="zm-meta-panel">
+                            <a itemprop="url" class="answer-data-link meta-item" target="_blank" href="">发布于 $date.format('yyyy-MM-dd HH:mm:ss', $comment.comment.createdDate)</a>
+                            <a href="" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
+                                <i class="z-icon-comment"></i>0 条评论</a>
+
+                            <button class="item-collapse js-collapse" style="transition: none;">
+                                <i class="z-icon-fold"></i>收起</button>
+                        </div>
+                    </div>
+                </div>
+                <form action="/admin/review/status" method="post">
+                    <input type="hidden" name="comment_id" value="$!{comment.comment.id}"/>
+                    <input type="hidden" name="status" value="$!{comment.comment.status}"/>
+                    <div id="zh-question-answer-form-wrap" class="zh-question-answer-form-wrap">
+                        <div class="zm-editable-editor-wrap" style="">
+
+                            <div class="zm-command clearfix">
+                           <span class=" zg-right">
+                                <button type="submit" class="submit-button zg-btn-blue">
+                                    #if($comment.comment.status==0)
+                                        下线回答
+                                    #else
+                                        审核通过
+                                    #end
+                                </button></span>
+                        </div>
+                    </div>
+                </form>
+                #end
+            </div>
+            <a name="draft"></a>
+
+
+
+        </div>
+    </div>
+</div>
+#parse("new_foot.html")

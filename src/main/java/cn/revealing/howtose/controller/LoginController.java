@@ -39,7 +39,8 @@ public class LoginController {
     @Autowired
     JedisAdapter jedisAdapter;
 
-    @RequestMapping(value = "/reg/", method = RequestMethod.POST)
+    @RequestMapping(value = "/reg/", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
     public String reg(Model model,
                         @RequestParam("email") String email,
                         @RequestParam("password") String password,
@@ -59,7 +60,7 @@ public class LoginController {
                     .setExt("email", email)
                     .setExt("code", code);
             eventProducer.fireEvent(eventModel);
-            return "check";
+            return " 验证码发送成功";
         }catch (Exception e){
             LOGGER.error("注册异常： " +e.getMessage());
 
@@ -78,7 +79,7 @@ public class LoginController {
         if(curCode.equals("")) {
             return "验证码已过期或不存在";
         }
-        if(!code.equals(curCode)) {
+        if(!code.toUpperCase().equals(curCode)) {
             model.addAttribute("msg", "验证码错误！");
             return "login";
         }

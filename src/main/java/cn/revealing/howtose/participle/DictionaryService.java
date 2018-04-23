@@ -23,7 +23,7 @@ public class DictionaryService implements ApplicationListener<ContextRefreshedEv
         List<Keyword> words = keywordService.getKeywords(0, 9999);
         for(Keyword keyword : words) {
             if(keyword.getType() == 1)
-                CustomDictionary.add(keyword.getWord());
+                FBSegment.addWord(keyword.getWord());
         }
     }
 

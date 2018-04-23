@@ -18,10 +18,10 @@ public interface UserDAO {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(UserDAO.class);
     String TABLE_NAME = " user ";
-    String INSERT_FILEDS = " name, password, salt, head_url, email ";
+    String INSERT_FILEDS = " name, password, salt, head_url, email, authority ";
     String SELECT_FILEDS = "id, " + INSERT_FILEDS;
     @Insert( {" insert into ", TABLE_NAME ,"(", INSERT_FILEDS,
-            " ) values (#{name}, #{password}, #{salt}, #{headUrl}, #{email})"})
+            " ) values (#{name}, #{password}, #{salt}, #{headUrl}, #{email}, #{authority})"})
     int addUser(User user);
 
     @Select({"select ",SELECT_FILEDS, "from ", TABLE_NAME, "where id = #{id}"})

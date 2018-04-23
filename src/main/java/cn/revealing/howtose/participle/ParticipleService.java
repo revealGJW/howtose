@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Created by GJW on 2018/4/13.
@@ -31,12 +32,15 @@ public class ParticipleService {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    FBSegment fbSegment;
+
     public void addQuestionWord(Question question) {
         int qid = question.getId();
-        List<Term> keywords = HanLP.segment(question.getContent());
+        List<String> keywords = fbSegment.segment(question.getContent());
         List<String> searchWords = new ArrayList<>();
-        for (Term t : keywords) {
-            searchWords.add(t.word);
+        for (String t : keywords) {
+            searchWords.add(t);
         }
         System.out.println(keywords);
         Keyword aliveWord = keywordService.getExistWord(searchWords);
