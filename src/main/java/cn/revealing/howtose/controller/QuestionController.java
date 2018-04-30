@@ -56,11 +56,15 @@ public class QuestionController {
 
             question.setCreatedDate(new Date());
             question.setCommentCount(0);
-            if (questionService.addQuestion(question) > 0) {
+            int questionId;
+            if (( questionId = questionService.addQuestion(question)) > 0) {
+                int count = commentService.getCommentCount(questionId, EntityType.ENTITY_QUESTION);
+                System.out.println(count);
+                questionService.updateCommentCount(questionId, count);
                 return HowtoseUtil.getJsonString(0);
             }
         }catch (Exception e){
-            LOGGER.error(" 增加题目失败：", e.getMessage());
+            LOGGER.error(" 增加题目失败：", e);
         }
         return HowtoseUtil.getJsonString(1,"失败");
     }
