@@ -27,6 +27,9 @@ public interface QuestionDAO {
     List<Question> selectHotQuestions(@Param("offset") int offset,
                                          @Param("limit") int limit);
 
+    List<Question> selectNormalQuestions(@Param("offset") int offset,
+                                      @Param("limit") int limit);
+
     @Update({"update ", TABLE_NAME, " set title = #{title} where id = #{id}"})
     void updateTitle(Question question);
 

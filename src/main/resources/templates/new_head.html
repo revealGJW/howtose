@@ -257,6 +257,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <span class="arrow"></span>
                                     </a>
                                 </li>
+                                #if($user.authority && $user.authority >=3)
+                                <li aria-haspopup="true" class="menu-dropdown mega-menu-dropdown  mega-menu-full" id="zh-top-admin">
+                                    <a href="/admin/review"> 管理后台
+                                        <span class="arrow"></span>
+                                    </a>
+                                </li>
+                                #end
                             </ul>
                         </div>
                         <!-- END MEGA MENU -->

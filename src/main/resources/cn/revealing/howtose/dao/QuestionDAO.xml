@@ -12,7 +12,10 @@
         <include refid="table"/>
 
         <if test="userId != 0">
-            WHERE user_id = #{userId}
+            WHERE user_id = #{userId} and is_hot = 0
+        </if>
+        <if test="userId == 0">
+            WHERE is_hot = 0
         </if>
         ORDER BY id DESC
         LIMIT #{offset},#{limit}
@@ -24,6 +27,16 @@
         FROM
         <include refid="table"/>
         WHERE is_hot=1
+        ORDER BY id DESC
+        LIMIT #{offset},#{limit}
+    </select>
+
+    <select id="selectNormalQuestions" resultType="cn.revealing.howtose.model.Question">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        WHERE is_hot=0
         ORDER BY id DESC
         LIMIT #{offset},#{limit}
     </select>

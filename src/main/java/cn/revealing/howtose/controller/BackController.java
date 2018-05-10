@@ -1,10 +1,7 @@
 package cn.revealing.howtose.controller;
 
 import cn.revealing.howtose.model.*;
-import cn.revealing.howtose.services.CommentService;
-import cn.revealing.howtose.services.KeywordService;
-import cn.revealing.howtose.services.LikeService;
-import cn.revealing.howtose.services.UserService;
+import cn.revealing.howtose.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +32,9 @@ public class BackController {
     @Autowired
     LikeService likeService;
 
+    @Autowired
+    QuestionService questionService;
+
     @RequestMapping(value = "/word", method = RequestMethod.GET)
     public String wordConfig(Model model) {
         List<Keyword> keywords = keywordService.getKeywords(0, 20);
@@ -52,6 +52,7 @@ public class BackController {
             vo.set("user", userService.getUser(comment.getUserId()));
 
             vo.set("likeCount", likeService.getLikeCount(LikeType.ANSWER_LIKE, comment.getId()));
+            vo.set("question", questionService.getQuestion(comment.getEntityId()));
             comments.add(vo);
         }
         model.addAttribute("comments",comments);
@@ -59,12 +60,11 @@ public class BackController {
     }
 
     @RequestMapping(value = "/review/status", method = RequestMethod.POST)
-    @ResponseBody
     public String review(Model model, @RequestParam("comment_id") int commentId,
                          @RequestParam("status")int status) {
         status = status == 0 ? 1 : 0;
         commentService.changeCommentStatus(commentId, status);
-        return "修改成功";
+        return  "redirect:/admin/review";
     }
 
     @RequestMapping(value = "/word", method = RequestMethod.POST)

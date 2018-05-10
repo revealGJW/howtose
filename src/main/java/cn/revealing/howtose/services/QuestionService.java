@@ -56,4 +56,8 @@ public class QuestionService {
         return questionDAO.selectHotQuestions(offset, limit);
     }
 
+    public List<Question> getNormalQuestions(int offset, int limit){
+        return questionDAO.selectNormalQuestions(offset, limit);
+    }
+
 }
